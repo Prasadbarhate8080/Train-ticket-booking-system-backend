@@ -119,8 +119,8 @@ const loginUser = asyncHandler(async (req,res) => {
 
     const options = {
         httpOnly: true,
-        secure: false,  // HTTPS ke liye, localhost pe false rakh sakte ho
-        sameSite: "strict",
+        secure: true,  // HTTPS ke liye, localhost pe false rakh sakte ho
+        sameSite: "none",
         maxAge: 86400000 // 1 day (ACCESS_TOKEN_EXPIRY)
     };
     
