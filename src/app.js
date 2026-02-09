@@ -1,4 +1,5 @@
 import express, { urlencoded } from 'express';
+import { ApiError } from './utils/ApiError.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 const app = express();
@@ -22,6 +23,10 @@ app.use(express.urlencoded({extended: true,limit: "16kb"}));
 app.use(express.static('public'));
 app.use(cookieParser());
 
+app.use((err, req, res, next) => {
+  console.log("",err);
+  
+})
 //importing routes
 import {userRoutes} from './routes/user.routes.js';
 import { trainRoutes } from './routes/train.routes.js';

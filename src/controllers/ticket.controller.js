@@ -43,8 +43,6 @@ const bookTicket = asyncHandler(async (req, res) => {
         status: "confirmed"
     }); 
 
-    console.log(ticket);
-    
     if (!ticket) 
         throw new ApiError(400, "Error in creating ticket");
 
@@ -67,9 +65,6 @@ const getTicket = asyncHandler(async (req, res) => {
     .populate("passengerId")
 
 
-
-    
-
     if (!ticket) {
         return res.status(404).json({ error: "Ticket not found" });
     }
@@ -80,7 +75,7 @@ const getTicket = asyncHandler(async (req, res) => {
 
 const getTickets = asyncHandler(async (req,res) => {
     const userId = req.user._id;
-
+    
     const tickets = await ticketModel.find({userId: userId})
     .populate({path: "userId", select: "-refreshToken"})
     .populate("trainId")

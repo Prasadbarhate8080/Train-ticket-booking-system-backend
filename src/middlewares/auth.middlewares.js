@@ -7,16 +7,13 @@ export const verifyJWT=asyncHandler(async (req,res,next)=>{
     try {
         
       const token=req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ","")
-        
-      console.log(token);
-      
       if(!token)
       {
-          throw new ApiError(401,"Unauthorized Request");
+          throw new ApiError(300,"please login")
       }
       
       const decodedToken = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET)
-  
+      
       const user=await userModel.findById(decodedToken?._id).select("-password -refreshToken")
   
       if(!user)
@@ -27,7 +24,7 @@ export const verifyJWT=asyncHandler(async (req,res,next)=>{
       req.user=user;
       next();
     } catch (error) {
-     throw new ApiError(401, error?.message || "Invalid access token")
+        throw new ApiError(401, error?.message || "Invalid access token")
     }
  })
 
@@ -42,7 +39,7 @@ export const isAdmin = asyncHandler(async (req,res,next)=>{
         if(req.user.role !== "admin")
         {
             throw new ApiError(403,"You are not authorized to access this resource")
-        }
+        } 
         next();
     } catch (error) {
         throw new ApiError(401, error?.message || "Invalid access token")

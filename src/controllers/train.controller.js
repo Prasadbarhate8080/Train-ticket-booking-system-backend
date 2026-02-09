@@ -6,7 +6,6 @@ import { trainModel } from "../models/train.model.js";
 const getTrains = asyncHandler(async (req, res) => {
 
     const {source, destination} = req.query;
-    console.log(source,destination);
 
     if(!source || !destination)
     {

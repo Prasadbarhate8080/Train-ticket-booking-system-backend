@@ -10,7 +10,6 @@ ticketRoutes.route("/bookticket").post(verifyJWT,bookTicket)
 
 ticketRoutes.route("/gettickets").get(verifyJWT,getTickets)
 
-
 ticketRoutes.route("/getticket").get(verifyJWT,getTicket)
 
 export {ticketRoutes}

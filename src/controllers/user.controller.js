@@ -11,7 +11,7 @@ const generateAccessAndRefreshToken = async (userId) => {
         const user = await userModel.findById(userId)
         
         if(!user)
-            console.log("user not found");  
+         console.log("user not found");
        
         const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
@@ -43,7 +43,6 @@ const registerUser=asyncHandler(async (req,res)=>{
 
     
     const {name,email,password} = req.body;
-    console.log(name,email,password);
 
     if (
         [ email, name, password].some((field) => field?.trim() === "")
@@ -52,7 +51,7 @@ const registerUser=asyncHandler(async (req,res)=>{
     }
 
     const existedUser = await userModel.findOne({
-        $or: [{ email }]
+        $or: [{ email}]
     })
 
     if(existedUser)
@@ -84,9 +83,6 @@ const registerUser=asyncHandler(async (req,res)=>{
 const loginUser = asyncHandler(async (req,res) => {
 
     const {email,password} = req.body;
-    
-    console.log(req.body);
-
     if(
         [email,password].some((field)=>field?.trim()==="")
     )
